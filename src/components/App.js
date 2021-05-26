@@ -26,14 +26,14 @@ const App = () => {
             // console.log(abc);
 		}
 		for(let i=0;i<name2.length;i++) {
-            c = name1.charCodeAt(i);
+            c = name2.charCodeAt(i);
 			a = (c<97)?c-65:c-97;
             if(abc[a]===undefined) {
                 abc[a] = 0;
             }
 			abc[a]--;
 		}
-        console.log(abc);
+        // console.log(abc);
 		for(let i=0;i<abc.length;i++) {
             if(abc[i]===undefined) {
                 abc[i] = 0;
