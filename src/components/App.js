@@ -50,6 +50,9 @@ const App = () => {
                 default : setRelation("Siblings"); break;
             }
         }
+        else {
+            setRelation("Please Enter valid input")
+        }
     }
 
     const clear = () => {
