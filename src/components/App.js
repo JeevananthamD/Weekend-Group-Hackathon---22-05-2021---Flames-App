@@ -9,21 +9,35 @@ const App = () => {
     
     const submit = () => {
         let name1 = first.current.value;
-        let name2 = second.current.value
-        name1 = name1.toLocaleLowerCase();
-        name2 = name2.toLocaleLowerCase();
+        let name2 = second.current.value;
+        // name1 = name1.toLocaleLowerCase();
+        // name2 = name2.toLocaleLowerCase();
         let a = undefined;
+        let c = undefined;
         let abc = [];
         let sum = 0;
         for(let i=0;i<name1.length;i++) {
-			a = name1.charAt(i)-97;
+            c = name1.charCodeAt(i);
+			a = (c<97)?c-65:c-97;
+            if(abc[a]===undefined) {
+                abc[a] = 0;
+            }
 			abc[a]++;
+            // console.log(abc);
 		}
 		for(let i=0;i<name2.length;i++) {
-			a = name2.charAt(i)-97;
+            c = name1.charCodeAt(i);
+			a = (c<97)?c-65:c-97;
+            if(abc[a]===undefined) {
+                abc[a] = 0;
+            }
 			abc[a]--;
 		}
+        console.log(abc);
 		for(let i=0;i<abc.length;i++) {
+            if(abc[i]===undefined) {
+                abc[i] = 0;
+            }
 			sum = (abc[i]<0)? sum + (-1*abc[i]): sum + abc[i];
 		}
 		switch(sum%6) {
@@ -36,14 +50,21 @@ const App = () => {
 		}
     }
 
-        return(
-            <div id="main">
-               <input type="text" ref={first}/>
-               <input type="text" ref={second}/>
-               <button onClick={submit}>Submit</button>
-               <h3>{relation}</h3>
-            </div>
-        )
+    const clear = () => {
+        first.current.value = "";
+        second.current.value = "";
+        setRelation(undefined);
+    }
+
+    return(
+        <div id="main">
+            <input type="text" ref={first} data-testid="input1"/>
+            <input type="text" ref={second} data-testid="input2"/>
+            <button onClick={submit} data-testid="calculate_relationship">Calculate Relationship Future</button>
+            <button onClick={clear} data-testid="clear">Clear inputs and relationship status</button>
+            <h3 data-testid="answer">{relation}</h3>
+        </div>
+    )
     
 }
 
