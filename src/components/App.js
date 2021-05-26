@@ -16,38 +16,40 @@ const App = () => {
         let c = undefined;
         let abc = [];
         let sum = 0;
-        for(let i=0;i<name1.length;i++) {
-            c = name1.charCodeAt(i);
-			a = (c<97)?c-65:c-97;
-            if(abc[a]===undefined) {
-                abc[a] = 0;
+        if(name1!=="" && name2!=="") {
+            for(let i=0;i<name1.length;i++) {
+                c = name1.charCodeAt(i);
+                a = (c<97)?c-65:c-97;
+                if(abc[a]===undefined) {
+                    abc[a] = 0;
+                }
+                abc[a]++;
+                // console.log(abc);
             }
-			abc[a]++;
+            for(let i=0;i<name2.length;i++) {
+                c = name2.charCodeAt(i);
+                a = (c<97)?c-65:c-97;
+                if(abc[a]===undefined) {
+                    abc[a] = 0;
+                }
+                abc[a]--;
+            }
             // console.log(abc);
-		}
-		for(let i=0;i<name2.length;i++) {
-            c = name2.charCodeAt(i);
-			a = (c<97)?c-65:c-97;
-            if(abc[a]===undefined) {
-                abc[a] = 0;
+            for(let i=0;i<abc.length;i++) {
+                if(abc[i]===undefined) {
+                    abc[i] = 0;
+                }
+                sum = (abc[i]<0)? sum + (-1*abc[i]): sum + abc[i];
             }
-			abc[a]--;
-		}
-        // console.log(abc);
-		for(let i=0;i<abc.length;i++) {
-            if(abc[i]===undefined) {
-                abc[i] = 0;
+            switch(sum%6) {
+                case 1: setRelation("Friends"); break;
+                case 2: setRelation("Love"); break;
+                case 3: setRelation("Affection"); break;
+                case 4: setRelation("Marriage"); break;
+                case 5: setRelation("Enemy"); break;
+                default : setRelation("Siblings"); break;
             }
-			sum = (abc[i]<0)? sum + (-1*abc[i]): sum + abc[i];
-		}
-		switch(sum%6) {
-			case 1: setRelation("Friends"); break;
-			case 2: setRelation("Love"); break;
-			case 3: setRelation("Affection"); break;
-			case 4: setRelation("Marriage"); break;
-			case 5: setRelation("Enemy"); break;
-			default : setRelation("Siblings"); break;
-		}
+        }
     }
 
     const clear = () => {
